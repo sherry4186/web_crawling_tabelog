@@ -1,4 +1,4 @@
-# web_crawling_tabelog_reviews
+# web_crawling_tabelog
 use scrapy to crawl tabelog_reviews
 
 ## main goal
