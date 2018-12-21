@@ -39,9 +39,7 @@ class TabelogSpider(scrapy.Spider):
             review_date = kuchikomi.css('div.rvw-item__date p::text').extract_first().strip()[:-2]
 
             # this review is written in this month or last month
-            if ((review_date == (self.month_now - relativedelta(months=1)).strftime("%Y/%m")) or (review_date == self.month_now.strftime("%Y/%m"))
-                or (review_date == (self.month_now - relativedelta(months=2)).strftime("%Y/%m"))
-                    or (review_date == (self.month_now - relativedelta(months=3)).strftime("%Y/%m"))):
+            if ((review_date == (self.month_now - relativedelta(months=1)).strftime("%Y/%m")) or (review_date == self.month_now.strftime("%Y/%m"))):
                 yield {
                     'shop_id': shop_id,
                     'review_date': review_date}
