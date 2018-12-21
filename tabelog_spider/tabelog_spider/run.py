@@ -17,6 +17,8 @@ def start_crawling():
 
 
 def return_shopid():
+    """get shop_ids from "restaurants.txt" and output to a csv_file (which will be used by spider)
+    """
     shopid_list = []
 
     with open('spiders/restaurants_test.txt', "r") as f:
