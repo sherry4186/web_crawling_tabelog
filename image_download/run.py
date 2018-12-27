@@ -5,7 +5,7 @@ import requests
 from time import sleep
 
 
-def image_download(info):
+def _image_download(info):
     """download images
 
     Args:
@@ -24,6 +24,7 @@ def image_download(info):
 
 def start_crawling(image_data_file, download_folder='image/'):
     """get (shop_id,image_url) pair from "data/image_data_test.csv" and download images
+
     """
 
     # image folder
@@ -45,7 +46,7 @@ def start_crawling(image_data_file, download_folder='image/'):
 
     so use ThreadPool
     '''
-    results = pool.map(image_download, list(zip(df['id'], df['image_url'])))
+    results = pool.map(_image_download, list(zip(df['id'], df['image_url'])))
 
     # close the pool and wait for the work to finish
     pool.close()
