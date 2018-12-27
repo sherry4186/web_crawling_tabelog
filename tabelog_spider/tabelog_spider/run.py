@@ -28,5 +28,14 @@ def return_shopid():
     df.to_csv('spiders/tabelog_shopid.csv', index=False)
 
 
+def process_output(result_file):
+    df = pd.read_csv(result_file)
+    df['shop_id'] = df['shop_id'].str.slice(20, -1)
+
+    output_filename = result_file.replace('.csv', '') + '_processed.csv'
+    df.to_csv(output_filename, index=False)
+
+
 return_shopid()
 start_crawling()
+process_output(result_file='tabelog.csv')
