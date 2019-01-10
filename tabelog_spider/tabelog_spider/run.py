@@ -15,6 +15,7 @@ def start_crawling():
 
 def return_shopid():
     """get shop_ids from "restaurants.txt" and output to a csv_file (which will be used by spider)
+
     """
     shopid_list = []
 
@@ -29,6 +30,14 @@ def return_shopid():
 
 
 def process_output(input_file, suffix):
+    """change shop_ids: 
+       'https://tabelog.com/tokyo/A1304/A130401/13045287/' → 'tokyo/A1304/A130401/13045287'
+
+    Args:
+        input_file: origin file (like 'tabelog.csv')
+        suffix:     suffix (like '_processed.csv' so that output file is 'tabelog_processed.csv')
+
+    """
     df = pd.read_csv(input_file)
     df['shop_id'] = df['shop_id'].str.slice(20, -1)
 
