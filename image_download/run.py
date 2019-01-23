@@ -9,7 +9,7 @@ def _image_download(info):
     """download images
 
     Args:
-        info: (shop_id,image_url) pair
+        info: (menu_id,image_url) pair
 
     """
     image_file = 'image/' + info[0].replace('/', '_') + '.jpg'
@@ -23,7 +23,7 @@ def _image_download(info):
 
 
 def start_crawling(image_data_file, download_folder='image/'):
-    """get (shop_id,image_url) pair from "data/image_data_test.csv" and download images
+    """get (menu_id,image_url) pair from "data/image_data_test.csv" and download images
 
     """
 
