@@ -4,12 +4,13 @@ from scrapy.utils.project import get_project_settings
 import pandas as pd
 
 from spiders.tabelog_review import TabelogSpider
+from spiders.cookpad_images import CookpadImageSpider
 
 
-def start_crawling():
+def start_crawling(spider):
 
     process = CrawlerProcess(get_project_settings())
-    process.crawl(TabelogSpider)
+    process.crawl(spider)
     process.start()
 
 
@@ -45,6 +46,14 @@ def process_output(input_file, suffix):
     df.to_csv(output_filename, index=False)
 
 
-return_shopid()
-start_crawling()
-process_output(input_file='tabelog.csv', suffix='_processed.csv')
+def main_tabelog_review_spider():
+    return_shopid()
+    start_crawling(spider=TabelogSpider)
+    process_output(input_file='tabelog.csv', suffix='_processed.csv')
+
+
+def main_cookpad_recipe_image_spider():
+    start_crawling(spider=CookpadImageSpider)
+
+
+main_cookpad_recipe_image_spider()

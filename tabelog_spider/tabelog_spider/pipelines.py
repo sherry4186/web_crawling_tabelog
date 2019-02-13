@@ -5,7 +5,10 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+import scrapy
+from scrapy.exceptions import DropItem
 from scrapy.exporters import CsvItemExporter
+from scrapy.pipelines.images import ImagesPipeline
 
 
 class TabelogSpiderExportPipeline(object):
@@ -38,3 +41,20 @@ class TabelogSpiderExportPipeline(object):
     def process_item(self, item, spider):
         self.exporter.export_item(item)
         return item
+
+
+class CookpadImageSpiderExportPipeline(ImagesPipeline):
+    """ Get recipe's id and image, then download the image and name the image_file like: id.jpg (for example: 3398.jpg)
+
+    """
+
+    def get_media_requests(self, item, info):
+        yield scrapy.Request(item['recipe_image_url'], meta={'item': item})
+
+    def file_path(self, request, response=None, info=None):
+        """ Rename image_file name (default name is random string)
+
+        """
+        item = request.meta['item']
+        file_name = item['recipe_id'] + '.jpg'
+        return file_name
